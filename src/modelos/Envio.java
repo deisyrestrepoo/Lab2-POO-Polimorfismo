@@ -5,12 +5,14 @@ public abstract class Envio {
     private String cliente;
     private double peso;
     private double distancia;
+    private double costo;
 
-    public Envio(String codigo, String cliente, double peso, double distancia) {
+    public Envio(String codigo, String cliente, double peso, double distancia,double costo) {
         this.codigo = codigo;
         this.cliente = cliente;
         this.peso = peso;
         this.distancia = distancia;
+        this.costo = costo;
     }
 
     public String getCodigo() {
@@ -27,6 +29,10 @@ public abstract class Envio {
 
     public double getDistancia() {
         return distancia;
+    }
+
+    public double getCosto() {
+        return costo;
     }
      
     // Métodos polimórficos

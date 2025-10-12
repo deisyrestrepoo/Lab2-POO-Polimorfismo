@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class Terrestre extends Envio {
     
-    public Terrestre(String codigo, String cliente,double peso, double distancia){
-        super(codigo, cliente, peso, distancia);
+    public Terrestre(String codigo, String cliente,double peso, double distancia, double costo){
+        super(codigo, cliente, peso, distancia, costo);
     }
 
     @Override
@@ -21,7 +21,8 @@ public class Terrestre extends Envio {
             getCodigo(),
             getCliente(),
             df.format(getPeso()),
-            df.format(getDistancia())
+            df.format(getDistancia()),
+            df.format(getCosto()),
         };
     }
 

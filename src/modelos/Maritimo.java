@@ -3,8 +3,8 @@ package modelos;
 import java.text.DecimalFormat;
 
 public class Maritimo extends Envio{
-    public Maritimo(String codigo, String cliente,double peso, double distancia){
-        super(codigo, cliente, peso, distancia);
+    public Maritimo(String codigo, String cliente,double peso, double distancia, double costo){
+        super(codigo, cliente, peso, distancia, costo);
     }
 
     @Override
@@ -20,7 +20,8 @@ public class Maritimo extends Envio{
             getCodigo(),
             getCliente(),
             df.format(getPeso()),
-            df.format(getDistancia())
+            df.format(getDistancia()),
+            df.format(getCosto()),
         };
     } 
 
