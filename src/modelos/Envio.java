@@ -28,7 +28,10 @@ public abstract class Envio {
     public double getDistancia() {
         return distancia;
     }
-
+     
+    // Métodos polimórficos
     public abstract String[] mostrarDatos();
+
+    public abstract double calcularTarifa();
 
 }
