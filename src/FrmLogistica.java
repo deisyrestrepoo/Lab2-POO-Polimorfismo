@@ -269,7 +269,7 @@ public class FrmLogistica extends JFrame {
             return false;
         }
         
-        if (cliente.trim().length() < 1 || cliente.trim().length() > 100) {
+        if (cliente.trim().length() < 1) {
             return false;
         }
         
@@ -291,7 +291,8 @@ public class FrmLogistica extends JFrame {
             if (parte.length() < 1) {
                 return false;
             }
-            if (!parte.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$")) {
+            // Permitir letras y opcionalmente guiones o apóstrofes entre letras (no al inicio/fin ni repetidos)
+            if (!parte.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+(?:[-'][a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+)*$")) {
                 return false;
             }
         }
@@ -308,9 +309,7 @@ public class FrmLogistica extends JFrame {
             return "El nombre del cliente debe tener al menos 1 carácter";
         }
         
-        if (cliente.trim().length() > 100) {
-            return "El nombre del cliente no puede tener más de 100 caracteres";
-        }
+        
         
         if (!cliente.equals(cliente.trim())) {
             return "El nombre del cliente no puede empezar o terminar con espacios";
@@ -328,10 +327,10 @@ public class FrmLogistica extends JFrame {
         
         for (String parte : partes) {
             if (parte.length() < 1) {
-                return "Cada parte del nombre debe tener al menos 1 carácter";
+                return "Cada parte del nombre debe tener al menos 1 carácter"; // esto ya no es necesario
             }
-            if (!parte.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$")) {
-                return "Cada parte del nombre solo puede contener letras";
+            if (!parte.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+(?:[-'][a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+)*$")) {
+                return "Cada parte del nombre solo puede contener letras y opcionalmente guiones o apóstrofes entre letras";
             }
         }
         

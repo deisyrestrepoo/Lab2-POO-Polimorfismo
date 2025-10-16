@@ -45,6 +45,17 @@ src/
 ### 3. Encapsulación
 - Atributos de `Envio` son privados y se acceden mediante getters.
 
+## 📊 Flujo de Datos
+
+```mermaid
+graph TD
+    A[Usuario en FrmLogistica] --> B[EnvioServicio.agregar()]
+    B --> C[Crear objeto según tipo]
+    C --> D[calcularTarifa() - Polimorfismo]
+    D --> E[Almacenar en List<Envio>]
+    E --> F[Actualizar tabla]
+```
+
 ## 🚀 Cómo Ejecutar
 
 ### Compilación
@@ -66,14 +77,14 @@ java -cp bin App
 - Distancia (debe ser positiva)
 
 ### Validación del Nombre del Cliente
-- Mínimo: **1 carácter**; Máximo: **100 caracteres**.
-- Palabras: **1 o más** 
+- Longitud mínima: **1 carácter**; **sin límite máximo**.
+- Palabras: **1 o más**.
 - Sin espacios al inicio o al final.
 - Sin múltiples espacios consecutivos.
 - Caracteres permitidos en el texto completo: letras (incluye acentos y ñ/ü), espacios, punto (`.`), guion (`-`) y apóstrofe (`'`).
-- Cada parte separada por espacio debe contener **solo letras** (incluye acentos y ñ/ü).
+- Cada parte separada por espacio debe contener letras y, opcionalmente, guiones o apóstrofes entre letras (por ejemplo, `Ana-María`, `O’Connor`).
 
-Mensajes de error específicos devueltos por la validación informan el motivo exacto (vacío, longitud, espacios indebidos, caracteres inválidos, etc.).
+Mensajes de error específicos informan el motivo exacto (vacío, longitud, espacios indebidos, caracteres inválidos, etc.).
 
 ### Validaciones Numéricas
 - `peso` y `distancia` deben ser numéricos y **mayores que 0**.
@@ -83,6 +94,29 @@ Mensajes de error específicos devueltos por la validación informan el motivo e
 - Confirmación antes de eliminar un envío.
 - Mensajes de éxito y error en las operaciones clave.
 
+## 🎨 Interfaz de Usuario (Swing)
+
+- **Barra de Herramientas**: botones con iconos para agregar/quitar.
+- **Formulario de Edición**: campos para número, cliente, tipo, peso y distancia.
+- **Tabla de Datos**: muestra envíos con formato; se actualiza al agregar/eliminar.
+
+## 🧼 Estilo de Código
+
+- Código **limpio**, sin comentarios superfluos.
+- Nombres descriptivos y consistentes.
+- Separación clara entre modelo (`modelos`), lógica de aplicación (`servicios`) e interfaz (`FrmLogistica`).
+
+## 📦 Patrones y Prácticas
+
+- **Template Method**: `Envio` define estructura común; subclases implementan cálculos.
+- **Factory (simple)** en `EnvioServicio.agregar()` para instanciar según `TipoEnvio`.
+- **Separación de responsabilidades**: UI, servicio y modelos desacoplados.
+
+## 🔁 Cálculo de Tarifas
+- Terrestre: `distancia * 1500 + peso * 2000`
+- Aéreo: `distancia * 5000 + peso * 4000`
+- Fluvial: `distancia * 800 + peso * 1000`
+
 ---
 
-Esta documentación refleja el estado actual del código, incluyendo la validación de nombre de cliente (mínimo 1 carácter y sin límite de palabras) y el conjunto de tipos de envío soportados (Terrestre, Aéreo y Fluvial).
+Esta documentación refleja el estado actual del código, incluyendo la validación de nombre de cliente (mínimo 1 carácter y sin límite máximo de caracteres) y el conjunto de tipos de envío soportados (Terrestre, Aéreo y Fluvial).

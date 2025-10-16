@@ -14,7 +14,7 @@ public class Terrestre extends Envio {
 
     @Override
     public String[] mostrarDatos() {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
+        DecimalFormat df = new DecimalFormat("#,##0.##");
         return new String[]{
             "TERRESTRE",
             getCodigo(),
