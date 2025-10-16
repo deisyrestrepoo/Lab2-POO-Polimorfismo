@@ -18,7 +18,7 @@ public class EnvioServicio {
 
     private static List<Envio> envios = new ArrayList<>();
 
-    public static Envio getCuenta(int posicion) {
+    public static Envio getEnvio(int posicion) {
         if (posicion >= 0 && posicion < envios.size()) {
             return envios.get(posicion);
         } else {

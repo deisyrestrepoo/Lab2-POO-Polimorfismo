@@ -39,7 +39,6 @@ public abstract class Envio {
         return costo;
     }
      
-    // Métodos polimórficos
     public abstract String[] mostrarDatos();
 
     public abstract double calcularTarifa();

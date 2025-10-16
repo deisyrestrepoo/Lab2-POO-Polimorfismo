@@ -21,6 +21,7 @@ import modelos.Envio;
 import modelos.TipoEnvio;
 import servicios.EnvioServicio;
 import servicios.realServicio;
+import servicios.validarServicio;
 
 public class FrmLogistica extends JFrame {
 
@@ -178,7 +179,12 @@ public class FrmLogistica extends JFrame {
             String cliente = txtCliente.getText().trim();
             double peso = realServicio.leerReal(txtPeso.getText());
             double distancia = realServicio.leerReal(txtDistanciaKm.getText());
+            
+            if(!validarServicio.validarCliente(cliente)){
+                JOptionPane.showMessageDialog(this, validarServicio.obtenerMensajeErrorCliente(cliente));
+            return;
 
+            }
             if (!cliente.isEmpty() &&
                     !codigo.isEmpty()) {
 
@@ -191,6 +197,7 @@ public class FrmLogistica extends JFrame {
                         cliente, peso, distancia, 0);
                     EnvioServicio.mostrar(tblLogistica);
                     JOptionPane.showMessageDialog(this, "Se ha guardado el envío a realizar");
+                    limpiarFormulario();
             } else {
                 JOptionPane.showMessageDialog(this, "Por favor ingresar código y cliente para guardar correctamente ");
             }
@@ -204,6 +211,13 @@ public class FrmLogistica extends JFrame {
     private void btnCancelarEnvioClick() {
         pnlEditarEnvio.setVisible(false);
 
+    }
+    private void limpiarFormulario() {
+        txtNumero.setText("");
+        txtCliente.setText("");
+        txtPeso.setText("");
+        txtDistanciaKm.setText("");
+        cmbTipoEnvio.setSelectedIndex(0);
     }
 
 }
