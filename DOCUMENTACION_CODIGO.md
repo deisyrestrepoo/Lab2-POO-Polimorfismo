@@ -45,17 +45,6 @@ src/
 ### 3. Encapsulación
 - Atributos de `Envio` son privados y se acceden mediante getters.
 
-## 📊 Flujo de Datos
-
-```mermaid
-graph TD
-    A[Usuario en FrmLogistica] --> B[EnvioServicio.agregar()]
-    B --> C[Crear objeto según tipo]
-    C --> D[calcularTarifa() - Polimorfismo]
-    D --> E[Almacenar en List<Envio>]
-    E --> F[Actualizar tabla]
-```
-
 ## 🚀 Cómo Ejecutar
 
 ### Compilación
@@ -78,7 +67,7 @@ java -cp bin App
 
 ### Validación del Nombre del Cliente
 - Mínimo: **1 carácter**; Máximo: **100 caracteres**.
-- Palabras: **1 o más** (sin límite superior).
+- Palabras: **1 o más** 
 - Sin espacios al inicio o al final.
 - Sin múltiples espacios consecutivos.
 - Caracteres permitidos en el texto completo: letras (incluye acentos y ñ/ü), espacios, punto (`.`), guion (`-`) y apóstrofe (`'`).
