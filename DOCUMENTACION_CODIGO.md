@@ -83,11 +83,6 @@ Mensajes de error específicos devueltos por la validación informan el motivo e
 - Confirmación antes de eliminar un envío.
 - Mensajes de éxito y error en las operaciones clave.
 
-## 🔁 Cálculo de Tarifas
-- Terrestre: `distancia * 1500 + peso * 2000`
-- Aéreo: `distancia * 5000 + peso * 4000`
-- Fluvial: `distancia * 800 + peso * 1000`
-
 ---
 
 Esta documentación refleja el estado actual del código, incluyendo la validación de nombre de cliente (mínimo 1 carácter y sin límite de palabras) y el conjunto de tipos de envío soportados (Terrestre, Aéreo y Fluvial).
