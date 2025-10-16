@@ -251,6 +251,11 @@ public class FrmLogistica extends JFrame {
                 "Por favor ingrese valores numéricos válidos para peso y distancia", 
                 "Error", 
                 javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                e.getMessage(), 
+                "Código duplicado", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, 
                 "Error al guardar el envío: " + e.getMessage(), 

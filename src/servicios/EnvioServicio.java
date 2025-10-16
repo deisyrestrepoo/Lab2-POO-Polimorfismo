@@ -27,7 +27,23 @@ public class EnvioServicio {
         }
     }
 
+    public static boolean codigoExiste(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            return false;
+        }
+        for (Envio envio : envios) {
+            if (envio.getCodigo().equalsIgnoreCase(codigo.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Envio agregar(TipoEnvio tipo, String codigo, String cliente, double peso, double distancia){
+        if (codigoExiste(codigo)) {
+            throw new IllegalArgumentException("El código '" + codigo + "' ya existe. Por favor ingrese un código único.");
+        }
+        
         Envio envio = null;
         switch (tipo) {
             case TERRESTRE -> envio = new modelos.Terrestre(codigo, cliente, peso, distancia);
