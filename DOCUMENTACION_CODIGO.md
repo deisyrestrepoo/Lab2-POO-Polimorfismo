@@ -83,24 +83,6 @@ Mensajes de error específicos devueltos por la validación informan el motivo e
 - Confirmación antes de eliminar un envío.
 - Mensajes de éxito y error en las operaciones clave.
 
-## 🎨 Interfaz de Usuario (Swing)
-
-- **Barra de Herramientas**: botones con iconos para agregar/quitar.
-- **Formulario de Edición**: campos para número, cliente, tipo, peso y distancia.
-- **Tabla de Datos**: muestra envíos con formato; se actualiza al agregar/eliminar.
-
-## 🧼 Estilo de Código
-
-- Código **limpio**, sin comentarios superfluos.
-- Nombres descriptivos y consistentes.
-- Separación clara entre modelo (`modelos`), lógica de aplicación (`servicios`) e interfaz (`FrmLogistica`).
-
-## 📦 Patrones y Prácticas
-
-- **Template Method**: `Envio` define estructura común; subclases implementan cálculos.
-- **Factory (simple)** en `EnvioServicio.agregar()` para instanciar según `TipoEnvio`.
-- **Separación de responsabilidades**: UI, servicio y modelos desacoplados.
-
 ## 🔁 Cálculo de Tarifas
 - Terrestre: `distancia * 1500 + peso * 2000`
 - Aéreo: `distancia * 5000 + peso * 4000`
