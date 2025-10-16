@@ -2,21 +2,21 @@ package modelos;
 
 import java.text.DecimalFormat;
 
-public class Maritimo extends Envio{
-    public Maritimo(String codigo, String cliente,double peso, double distancia, double costo){
-        super(codigo, cliente, peso, distancia, costo);
+public class Fluvial extends Envio{
+    public Fluvial(String codigo, String cliente, double peso, double distancia){
+        super(codigo, cliente, peso, distancia);
     }
 
     @Override
     public double calcularTarifa(){
-        return getDistancia()*800 + getPeso()*1000;
+        return getDistancia() * 800 + getPeso() * 1000;
     }
 
     @Override
     public String[] mostrarDatos() {
         DecimalFormat df = new DecimalFormat("#,##0.00");
         return new String[]{
-            "MARITIMO",
+            "FLUVIAL",
             getCodigo(),
             getCliente(),
             df.format(getPeso()),
@@ -24,5 +24,4 @@ public class Maritimo extends Envio{
             df.format(getCosto()),
         };
     } 
-
 }

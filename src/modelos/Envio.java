@@ -5,14 +5,12 @@ public abstract class Envio {
     private String cliente;
     private double peso;
     private double distancia;
-    private double costo;
 
-    public Envio(String codigo, String cliente, double peso, double distancia,double costo) {
+    public Envio(String codigo, String cliente, double peso, double distancia) {
         this.codigo = codigo;
         this.cliente = cliente;
         this.peso = peso;
         this.distancia = distancia;
-        this.costo = costo;
     }
 
     public String getCodigo() {
@@ -32,12 +30,10 @@ public abstract class Envio {
     }
 
     public double getCosto() {
-        return costo;
+        return calcularTarifa();
     }
-     
-    // Métodos polimórficos
+
     public abstract String[] mostrarDatos();
 
     public abstract double calcularTarifa();
-
 }
