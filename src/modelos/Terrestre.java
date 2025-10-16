@@ -2,15 +2,19 @@ package modelos;
 
 import java.text.DecimalFormat;
 
-public class Terrestre extends Envio {
+import interfaces.ITarifa;
+
+public class Terrestre extends Envio implements ITarifa {
     
-    public Terrestre(String codigo, String cliente,double peso, double distancia, double costo){
-        super(codigo, cliente, peso, distancia, costo);
+    public Terrestre(String codigo, String cliente,double peso, double distancia){
+        super(codigo, cliente, peso, distancia, 0);
     }
 
     @Override
     public double calcularTarifa(){
-        return getDistancia()*1500 + getPeso()*2000;
+        double costo = getDistancia()*1500 + getPeso()*2000;
+        setCosto(costo);
+        return costo;
     }
 
     @Override

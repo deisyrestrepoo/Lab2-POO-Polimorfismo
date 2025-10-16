@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,8 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 
+import modelos.Envio;
 import modelos.TipoEnvio;
 import servicios.EnvioServicio;
+import servicios.realServicio;
 
 public class FrmLogistica extends JFrame {
 
@@ -37,10 +40,10 @@ public class FrmLogistica extends JFrame {
         JToolBar tbLogistica = new JToolBar();
 
         JButton btnAgregarEnvio = new JButton();
-        ImageIcon iconAgregar = new ImageIcon(
+        ImageIcon agregarEnvio = new ImageIcon(
                 new ImageIcon(getClass().getResource("/iconos/agregarEnvio.png"))
-                        .getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH));
-        btnAgregarEnvio.setIcon(iconAgregar);
+                        .getImage().getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH));
+        btnAgregarEnvio.setIcon(agregarEnvio);
         btnAgregarEnvio.setToolTipText("Agregar Envío");
         btnAgregarEnvio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -50,10 +53,10 @@ public class FrmLogistica extends JFrame {
         tbLogistica.add(btnAgregarEnvio);
 
         JButton btnQuitarEnvio = new JButton();
-        ImageIcon iconQuitar = new ImageIcon(
-                new ImageIcon(getClass().getResource("/iconos/quitarEnvio.png"))
-                .getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH));
-        btnQuitarEnvio.setIcon(iconQuitar);        
+        ImageIcon eliminarEnvio = new ImageIcon(
+                new ImageIcon(getClass().getResource("/iconos/eliminarEnvio.png"))
+                .getImage().getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH));
+        btnQuitarEnvio.setIcon(eliminarEnvio);        
         btnQuitarEnvio.setToolTipText("Quitar Cuenta");
         btnQuitarEnvio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -158,10 +161,43 @@ public class FrmLogistica extends JFrame {
     }
 
     private void btnQuitarEnvioClick() {
+        if (tblLogistica.getSelectedRow() >=0){
+            EnvioServicio.eliminar(tblLogistica.getSelectedRow());
+            EnvioServicio.mostrar(tblLogistica);
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar el envio que desea eliminar");
+        }
 
     }
 
     private void btnGuardarEnvioClick() {
+       pnlEditarEnvio.setVisible(false);
+        try {
+            String tipo = cmbTipoEnvio.getSelectedItem().toString();
+            String codigo = txtNumero.getText().trim();
+            String cliente = txtCliente.getText().trim();
+            double peso = realServicio.leerReal(txtPeso.getText());
+            double distancia = realServicio.leerReal(txtDistanciaKm.getText());
+
+            if (!cliente.isEmpty() &&
+                    !codigo.isEmpty()) {
+
+                if(EnvioServicio.codigoExiste(codigo)){
+                    JOptionPane.showMessageDialog(this, "Este código ya existe, por favor inrese uno nuevo");
+                    return;
+
+                }
+                Envio envio = EnvioServicio.agregar((TipoEnvio) cmbTipoEnvio.getSelectedItem(), codigo,
+                        cliente, peso, distancia, 0);
+                    EnvioServicio.mostrar(tblLogistica);
+                    JOptionPane.showMessageDialog(this, "Se ha guardado el envío a realizar");
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor ingresar código y cliente para guardar correctamente ");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,  ex.getMessage() );
+        } 
 
     }
 

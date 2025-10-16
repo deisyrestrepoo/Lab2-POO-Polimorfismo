@@ -2,14 +2,19 @@ package modelos;
 
 import java.text.DecimalFormat;
 
-public class Aereo extends Envio {
-     public Aereo(String codigo, String cliente,double peso, double distancia, double costo){
-        super(codigo, cliente, peso, distancia, costo);
+import interfaces.ITarifa;
+
+public class Aereo extends Envio implements ITarifa {
+     public Aereo(String codigo, String cliente,double peso, double distancia){
+        super(codigo, cliente, peso, distancia, 0);
     }
 
     @Override
     public double calcularTarifa(){
-        return getDistancia()*5000 + getPeso()*4000;
+        double costo = getDistancia()*5000 + getPeso()*4000;
+        setCosto(costo);
+        return costo;
+        
     }
 
     @Override

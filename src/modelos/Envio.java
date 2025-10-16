@@ -15,6 +15,10 @@ public abstract class Envio {
         this.costo = costo;
     }
 
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
     public String getCodigo() {
         return codigo;
     }

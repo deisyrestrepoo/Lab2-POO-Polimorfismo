@@ -1,8 +1,8 @@
 package modelos;
 
 public enum TipoEnvio {
-    TERRESTRE,
-    AEREO,
-    MARITIMO
+    Terrestre,
+    Aereo,
+    Maritimo
 
 }

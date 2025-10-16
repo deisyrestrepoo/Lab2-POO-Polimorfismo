@@ -6,7 +6,10 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import modelos.Aereo;
 import modelos.Envio;
+import modelos.Maritimo;
+import modelos.Terrestre;
 import modelos.TipoEnvio;
 
 public class EnvioServicio {
@@ -23,13 +26,37 @@ public class EnvioServicio {
         }
     }
 
-    public static Envio agregar(TipoEnvio tipo, String codigo, String titular, double peso, double Distancia, double costo ){
-        Envio envio = null ;
+    public static boolean codigoExiste(String codigo){
+        for (Envio e : envios){
+            if (e.getCodigo().equalsIgnoreCase(codigo)){
+                return true;
+            }
 
-        envios.add(envio);
-        return envio;
-
+        }
+        return false;
     }
+
+    public static Envio agregar (TipoEnvio tipo, String codigo, String cliente, double peso, double distancia, double costo ){
+        Envio envio = null ;
+        switch (tipo) {
+            case Aereo:
+            envio = new Aereo(codigo, cliente, peso, distancia);
+            break;
+        case Terrestre:
+            envio = new Terrestre(codigo, cliente, peso, distancia );
+            break;
+        case Maritimo:
+            envio = new Maritimo(codigo, cliente, peso, distancia);
+            break;
+    }
+
+    double costoCalculado = envio.calcularTarifa();
+    envio.setCosto(costoCalculado);
+
+    envios.add(envio);
+
+    return envio;
+}
 
     public static void eliminar (int posicion){
         envios.remove(posicion);
@@ -50,7 +77,5 @@ public class EnvioServicio {
         tblLogistica.setModel(dtm);
 
     }
-
-    
 
 }

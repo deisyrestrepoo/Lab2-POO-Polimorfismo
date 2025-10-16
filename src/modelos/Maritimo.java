@@ -2,14 +2,19 @@ package modelos;
 
 import java.text.DecimalFormat;
 
-public class Maritimo extends Envio{
-    public Maritimo(String codigo, String cliente,double peso, double distancia, double costo){
-        super(codigo, cliente, peso, distancia, costo);
+import interfaces.ITarifa;
+
+public class Maritimo extends Envio implements ITarifa{
+    public Maritimo(String codigo, String cliente,double peso, double distancia){
+        super(codigo, cliente, peso, distancia, 0);
     }
 
     @Override
     public double calcularTarifa(){
-        return getDistancia()*800 + getPeso()*1000;
+        double costo = getDistancia()*800 + getPeso()*1000;
+        setCosto(costo);
+        return costo;
+        
     }
 
     @Override
@@ -23,6 +28,8 @@ public class Maritimo extends Envio{
             df.format(getDistancia()),
             df.format(getCosto()),
         };
-    } 
+    }
+
+
 
 }
